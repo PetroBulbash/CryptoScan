@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/popup.css">
+    <script src="qrc:///qtwebchannel/qwebchannel.js"></script>
+    <script src="js/sys.js"></script>        
+    <script src="js/main.js"></script>
+    <script src="js/popup.js"></script>
+    <script src="js/python.js"></script>
+    <script src="js/tmp.js"></script>
+    <script>
+
+      function xls() {
+        toPython("to_excel", '');
+      }
+      function check_unicode(ch) {
+        let ch1 = document.getElementById("mode_nonunicode");
+        let ch2 = document.getElementById("mode_unicode");
+        if (!ch1.checked && !ch2.checked) {
+          if (ch == ch1) {
+            ch2.checked = true;            
+          } else {
+            ch1.checked = true;
+          }
+        }
+        
+      }
+      function get_tlb() {
+        let body = document.querySelector("#tlb_result").outerHTML;
+        toPython("zzz", body);	
+      }
+    </script>
+</head>
+<body onload="iniDoc();" style="background-color: black; color: white;">
+
+  <div id="div_lev1" class="div-lev">
+    <!--<img src="img/logo-white.png" style="display:inline-block; vertical-align: top;  width: 140px;"/>-->
+    <!--<div style="margin-left: 20px; display: inline-block; width: calc(100% - 188px);">-->
+    <div>
+      <div class="div-area">
+        <img src="img/logo-white.png" style="float: right; width: 140px; margin-right: 20px; margin-top: 20px;"/>
+        <div class="title-area">Search settings</div>        
+        <div>
+          <div class="title-area-2">Selected folder:</div> 
+          <!--<span  id="search_source" style="font-weight: bold">Not Selected</span>-->
+          <span  id="search_source" style="font-weight: bold">E:/EXMPL/BTC/test</span>
+          <a href="#" class="button0 button2" id="go_select">select</a>
+        </div>
+        <div>
+          <div class="title-area-2">Types of files:</div> 
+          <input type="checkbox" id="mode_nonunicode" onclick="check_unicode(this);" checked="true"> - Search for non-unicoded items.<br>
+          <input type="checkbox" id="mode_unicode" onclick="check_unicode(this);"> - Search for unicoded items.<br>
+          <input type="checkbox" id="mode_pack"> - Search in archive files (<span class="clickable-link" onclick="show_pack_formats();">show formats</span>).<br>
+          <input type="checkbox" id="mode_excel"> - Search in excel-files (.xls, xlsx).<br>
+          <input type="checkbox" id="mode_docx"> - Search in word-files (.docx).<br>
+        </div>
+        <div>
+          <div class="title-area-2">Types of cryptocurrencies and addresses:
+            <a href="#" class="button0 button2" id="select_all" style="margin-right: 3px">select all</a>
+            <a href="#" class="button0 button2" id="unselect_all" style="margin-right: 3px">unselect all</a>
+          </div> 
+          <div style="height: 150px; overflow: auto; width: fit-content; padding-right: 30px;">
+            <div class="coin_check"><input type="checkbox" id="cur0"><span>Bitcoin public address.</span></div>
+            <div class="coin_check"><input type="checkbox" id="cur1"><span>Bitcoin P2SH public address.</span></div>
+            <div class="coin_check"><input type="checkbox" id="cur1"><span>Bitcoin P2SH public address.</span></div>
+            <div class="coin_check"><input type="checkbox" id="cur1"><span>Bitcoin P2SH public address.</span></div>
+            <div class="coin_check"><input type="checkbox" id="cur1"><span>Bitcoin P2SH public address.</span></div>
+            <div class="coin_check"><input type="checkbox" id="cur1"><span>Bitcoin P2SH public address.</span></div>
+            <div class="coin_check"><input type="checkbox" id="cur1"><span>Bitcoin P2SH public address.</span></div>
+            <div class="coin_check"><input type="checkbox" id="cur1"><span>Bitcoin P2SH public address.</span></div>
+            <div class="coin_check"><input type="checkbox" id="cur1"><span>Bitcoin P2SH public address.</span></div>
+            <div class="coin_check"><input type="checkbox" id="cur1"><span>Bitcoin P2SH public address.</span></div>
+            <div class="coin_check"><input type="checkbox" id="cur1"><span>Bitcoin P2SH public address.</span></div>
+            <div class="coin_check"><input type="checkbox" id="cur1"><span>Bitcoin P2SH public address.</span></div>
+            <div class="coin_check"><input type="checkbox" id="cur1"><span>Bitcoin P2SH public address.</span></div>
+          </div>
+        </div>
+        
+        <div style="text-align: center;">
+          <a href="#" class="button0 button1" id="go_search" style="margin-right: 3px">GO SEARCH</a>
+        </div>
+        
+      </div>
+      <br>
+
+    </div>
+  </div>
+
+  <div id="div_lev2" class="div-lev" style="width: calc(100% - 20px)">
+    <div class="div-area">
+      <div class="title-area">Search process</div>
+      <div id="cur_info" style="display: flex">
+        <div style="flex: 0 0 70px;">
+          <img src="img/loader.gif" id = "loader" style="width: 70px; height:70px"/>
+        </div>
+        <div style="flex: 1; vertical-align: middle;">
+          <p style="display: inline-block; vertical-align: bottom;">
+            <span id="process_info_main">the search has not started yet</span><br>
+            <span id="process_info_current">the search has not started yet</span>  
+          </p>
+        </div>
+
+        
+     
+      </div>
+      <div id="div_stop">
+        <a href="#" class="button0 button2" id="stop_process">stop</a>
+      </div>
+    </div>    
+  </div>
+  
+  <div id="div_lev3"  class="div-lev" style="width: calc(100% - 20px)">
+    <div class="div-area">
+      <div class="title-area">Search result</div>
+        <div id="div_not_found">Nothing has been found yet...</div>
+        <div style="height: 150px; overflow: auto;">
+          <table class="tg" id="tlb_result">
+            <thead>
+              <tr>
+                <th class="tg-0pky" id="hit">Hit</th>
+                <th class="tg-0pky" id="file">File</th>            
+                <th class="tg-0pky" id="in_pack">In pack</th>
+                <th class="tg-0pky" id="sh">Sheet</th>
+                <th class="tg-0pky" id="offset">Offset</th>
+                <th class="tg-0pky" id="type">Type</th>
+                <th class="tg-0pky" id="unicode">Unicode</th>
+                <th class="tg-0pky" id="is_true">True</th>
+                <th class="tg-0pky" id="test">Test</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="tg-2bhk"></td>
+                <td class="tg-2bhk"></td>
+                <td class="tg-2bhk"></td>
+                <td class="tg-2bhk"></td>
+                <td class="tg-2bhk"></td>
+                <td class="tg-2bhk"></td>
+                <td class="tg-2bhk"></td>
+                <td class="tg-2bhk"></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <a href="#" class="button0 button1" id="button_xls">Export in Excel</a>
+        <a href="#" class="button0 button1" id="button_clear">Clear result</a>
+    </div>    
+  </div>
+
+    
+    <br><a href="#" id="" class="button0 button1" onclick="get_tlb()">проба1</a>
+   
+    <div id="popup_tmpl" class="popup" style="display: none">
+      <div class="popup-header">
+      <span>Click here to move</span>
+      <button name="close" class="but-window close-pop" style="">✖</button>
+      </div>
+      <div class="pop-container"></div>
+      <div class="pop-footer">
+      <button name="hide" >закрыть</button>
+      </div>
+    </div>
+</body>
+</html>
+
