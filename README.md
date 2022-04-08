@@ -20,6 +20,9 @@ The program is developed in Python 3.9. It has not been tested on other versions
 To design the interface, a browser is used, into which a local web file is loaded (HTML+CSS+JS).
 
 ## Thanks
-The motivation for the development was script [BTCScan](https://gist.github.com/chriswcohen/7e28c95ba7354a986c34) from Chris Cohen to search for BTC-addresses (some code is borrowed from this script).
+The motivation for the development was script [BTCScan](https://gist.github.com/chriswcohen/7e28c95ba7354a986c34) from Chris Cohen to search for BTC-addresses (some code is borrowed from this script).<br>
+Some code is also taken from the [cryptocurrency-address-detector](https://gist.github.com/chriswcohen/7e28c95ba7354a986c34) (autor Nikolaos Kamarinakis).<br>
+The [CoinAddrValidator](https://pypi.org/project/coinaddrvalidator/) from Mohammad Aghamir plays a big role.
 
-
+## Feedback
+peter.zaretski@gmail.com - Peter Zaretski
