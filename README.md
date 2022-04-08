@@ -9,8 +9,7 @@ The program has a fully graphical interface and runs via an exe file. It does no
 <br><img src="https://user-images.githubusercontent.com/101092112/162491645-b347167b-4dc6-49b0-897a-ee57c1d6201e.png" width=400px height=300px>
 
 ## Support
-The dot/rc files should be compatible with Linux, macOS and WSL (Ubuntu on Windows).
-<br>Programm has tested for Windows only.
+Programm has tested for Windows only.
 
 ## Using
 In order to use the program, download and unpack the release, run the file cryptoscan.exe . A simple instruction for working with the program opens when you click the "help" button.
