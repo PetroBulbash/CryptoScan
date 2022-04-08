@@ -6,7 +6,7 @@ It can be useful for investigators, computer security specialists, individuals w
 
 ## Interface
 The program has a fully graphical interface and runs as an exe file. It does not require installation and can be used by investigators who have no knowledge of programming.
-![image](https://user-images.githubusercontent.com/101092112/162491645-b347167b-4dc6-49b0-897a-ee57c1d6201e.png =250x250)
+![image](https://user-images.githubusercontent.com/101092112/162491645-b347167b-4dc6-49b0-897a-ee57c1d6201e.png=250x250)
 
 
 ## Using
