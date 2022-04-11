@@ -12,7 +12,7 @@ The program has a fully graphical interface and runs via an exe file. It does no
 Programm has tested for Windows only.
 
 ## Using
-In order to use the program, download and unpack the release, run the file cryptoscan.exe . A simple instruction for working with the program opens when you click the "help" button.
+In order to use the program, download and unpack the [release](https://github.com/PetroBulbash/CryptoScan/releases/), run the file cryptoscan.exe . A simple instruction for working with the program opens when you click the "help" button.
 
 ## For developers
 The program is developed in Python 3.9. It has not been tested on other versions of Python.<br>
@@ -25,3 +25,4 @@ The [CoinAddrValidator](https://pypi.org/project/coinaddrvalidator/) from Mohamm
 
 ## Feedback
 peter.zaretski@gmail.com - Peter Zaretski
+
