@@ -67,6 +67,7 @@ class WB(QWebEngineView):
         backend.valueChanged.connect(self.fromJS)
         self.setWindowIcon(QtGui.QIcon('img/crypto-logo.ico'))
         self.setWindowTitle('CryptoScan')
+#        self.showNormal()
         self.channel = QtWebChannel.QWebChannel()
         self.channel.registerObject("backend", backend)
         self.setPage(WebEnginePage(self))
@@ -77,6 +78,8 @@ class WB(QWebEngineView):
         self.exe.runJS.connect(self.toJS)  # get signals and slots
         self.thread.started.connect(
         self.exe.examine_process)  # add start-thread signal to tun method from object in outher thread
+
+
 
     @QtCore.pyqtSlot(str) # Sending commands in Javascript from Python
     def toJS(self, js):
@@ -92,9 +95,3 @@ class WB(QWebEngineView):
 class WebEnginePage(QWebEnginePage):
     def javaScriptConsoleMessage(self, level, message, lineNumber, sourceID):
         print("javaScriptConsoleMessage: ", level, message, lineNumber, sourceID)
-
-
-class Window(QWidget):
-    def __init__(self, *args, **kwargs):
-        super(Window, self).__init__(*args, **kwargs)
-        self.resize(800, 600)

@@ -37,52 +37,77 @@
     </script>
 </head>
 <body onload="iniDoc();" style="background-color: black; color: white;">
-
+  
+  <!-- Arrea of logo and main settings of scanning-->
   <div id="div_lev1" class="div-lev">
-    <!--<img src="img/logo-white.png" style="display:inline-block; vertical-align: top;  width: 140px;"/>-->
-    <!--<div style="margin-left: 20px; display: inline-block; width: calc(100% - 188px);">-->
     <div>
       <div class="div-area">
-        <img src="img/logo-white.png" style="float: right; width: 140px; margin-right: 20px; margin-top: 20px;"/>
-        <div class="title-area">Search settings</div>        
+
+        <!-- Toolbar (language, help, license) and logo area -->
+        <div style="float: right">
+
+          <!-- Toolbar -->
+          <div class="dropdown" id="lang_menu" style="float: right">
+            <a href="#" class="button0 button2" id="cur_lang" style="margin-right: 3px">ln</a>
+            <div class="dropdown-content">
+              <a id="ru" href="#">ru</a>
+              <a id="en" href="#">en</a>
+            </div>
+          </div>
+          <a href="#" class="button0 button2" id="but_help" style="margin-right: 3px">help</a>
+          <a href="#" class="button0 button2" id="but_license" style="margin-right: 3px">license</a>
+        
+        <!-- Logo --> 
+          <div>
+            <img src="img/logo-white.png" style="float: right; width: 140px; margin-right: 20px; margin-top: 20px;"/>
+          </div>
+        </div>
+
+        <div class="title-area"><span id="titl_search_settings">Search settings</span></div>    
+        
+        <!-- Directory selection area -->
         <div>
-          <div class="title-area-2">Selected folder:</div> 
-          <!--<span  id="search_source" style="font-weight: bold">Not Selected</span>-->
+          <div class="title-area-2" id="titl_selected_folder">Selected folder:</div> 
           <span  id="search_source" style="font-weight: bold">E:/EXMPL/BTC/test</span>
           <a href="#" class="button0 button2" id="go_select">select</a>
         </div>
+  
+        <!-- Type file selection area -->
         <div>
-          <div class="title-area-2">Types of files:</div> 
-          <input type="checkbox" id="mode_nonunicode" onclick="check_unicode(this);" checked="true"> - Search for non-unicoded items.<br>
-          <input type="checkbox" id="mode_unicode" onclick="check_unicode(this);"> - Search for unicoded items.<br>
-          <input type="checkbox" id="mode_pack"> - Search in archive files (<span class="clickable-link" onclick="show_pack_formats();">show formats</span>).<br>
-          <input type="checkbox" id="mode_excel"> - Search in excel-files (.xls, xlsx).<br>
-          <input type="checkbox" id="mode_docx"> - Search in word-files (.docx).<br>
+          <div class="title-area-2" id="titl_types_of_files">Types of files:</div> 
+          <input type="checkbox" id="mode_nonunicode" onclick="check_unicode(this);" checked="true"> <span id="titl_mode_nonunicode">- Search for non-unicoded items</span>.<br>
+          <input type="checkbox" id="mode_unicode" onclick="check_unicode(this);"> <span id="titl_mode_unicode">- Search for unicoded items</span>.<br>
+          <input type="checkbox" id="mode_pack"> <span id="titl_mode_pack">- Search in archive files</span> (<span class="clickable-link" id="titl_show_formats" onclick="show_pack_formats();">show formats</span>).<br>
+          <input type="checkbox" id="mode_excel"> <span id="titl_mode_excel">- Search in excel-files (.xls, xlsx)</span>.<br>
+          <input type="checkbox" id="mode_docx"> <span id="titl_mode_docx">- Search in word-files (.docx)</span>.<br>
         </div>
+
+        <!-- Types currencies selection area -->
         <div>
-          <div class="title-area-2">Types of cryptocurrencies and addresses:
+          <div class="title-area-2"><span id="titl_types_crypto">Types of cryptocurrencies and addresses</span>:
             <a href="#" class="button0 button2" id="select_all" style="margin-right: 3px">select all</a>
             <a href="#" class="button0 button2" id="unselect_all" style="margin-right: 3px">unselect all</a>
           </div> 
           <div style="height: 150px; overflow: auto; width: fit-content; padding-right: 30px;">
             <div class="coin_check"><input type="checkbox" id="cur0"><span>Bitcoin public address.</span></div>
             <div class="coin_check"><input type="checkbox" id="cur1"><span>Bitcoin P2SH public address.</span></div>
-            <div class="coin_check"><input type="checkbox" id="cur1"><span>Bitcoin P2SH public address.</span></div>
-            <div class="coin_check"><input type="checkbox" id="cur1"><span>Bitcoin P2SH public address.</span></div>
-            <div class="coin_check"><input type="checkbox" id="cur1"><span>Bitcoin P2SH public address.</span></div>
-            <div class="coin_check"><input type="checkbox" id="cur1"><span>Bitcoin P2SH public address.</span></div>
-            <div class="coin_check"><input type="checkbox" id="cur1"><span>Bitcoin P2SH public address.</span></div>
-            <div class="coin_check"><input type="checkbox" id="cur1"><span>Bitcoin P2SH public address.</span></div>
-            <div class="coin_check"><input type="checkbox" id="cur1"><span>Bitcoin P2SH public address.</span></div>
-            <div class="coin_check"><input type="checkbox" id="cur1"><span>Bitcoin P2SH public address.</span></div>
-            <div class="coin_check"><input type="checkbox" id="cur1"><span>Bitcoin P2SH public address.</span></div>
-            <div class="coin_check"><input type="checkbox" id="cur1"><span>Bitcoin P2SH public address.</span></div>
-            <div class="coin_check"><input type="checkbox" id="cur1"><span>Bitcoin P2SH public address.</span></div>
+            <div class="coin_check"><input type="checkbox" id="cur2"><span>Bitcoin P2SH public address.</span></div>
+            <div class="coin_check"><input type="checkbox" id="cur3"><span>Bitcoin P2SH public address.</span></div>
+            <div class="coin_check"><input type="checkbox" id="cur4"><span>Bitcoin P2SH public address.</span></div>
+            <div class="coin_check"><input type="checkbox" id="cur5"><span>Bitcoin P2SH public address.</span></div>
+            <div class="coin_check"><input type="checkbox" id="cur6"><span>Bitcoin P2SH public address.</span></div>
+            <div class="coin_check"><input type="checkbox" id="cur7"><span>Bitcoin P2SH public address.</span></div>
+            <div class="coin_check"><input type="checkbox" id="cur8"><span>Bitcoin P2SH public address.</span></div>
+            <div class="coin_check"><input type="checkbox" id="cur9"><span>Bitcoin P2SH public address.</span></div>
+            <div class="coin_check"><input type="checkbox" id="cur10"><span>Bitcoin P2SH public address.</span></div>
+            <div class="coin_check"><input type="checkbox" id="cur11"><span>Bitcoin P2SH public address.</span></div>
+            <div class="coin_check"><input type="checkbox" id="cur12"><span>Bitcoin P2SH public address.</span></div>
           </div>
         </div>
-        
-        <div style="text-align: center;">
-          <a href="#" class="button0 button1" id="go_search" style="margin-right: 3px">GO SEARCH</a>
+
+        <!-- Execute button area -->        
+        <div style="text-align: left; margin-top: 10px">
+          <a href="#" class="button0 button1" id="go_search" style="margin-right: 3px">|         GO SEARCH          |</a>
         </div>
         
       </div>
@@ -90,10 +115,11 @@
 
     </div>
   </div>
-
+  
+  <!-- The display area of search process -->
   <div id="div_lev2" class="div-lev" style="width: calc(100% - 20px)">
     <div class="div-area">
-      <div class="title-area">Search process</div>
+      <div class="title-area" id="titl_search_process">Search process</div>
       <div id="cur_info" style="display: flex">
         <div style="flex: 0 0 70px;">
           <img src="img/loader.gif" id = "loader" style="width: 70px; height:70px"/>
@@ -114,9 +140,10 @@
     </div>    
   </div>
   
+  <!-- The display area of search result -->
   <div id="div_lev3"  class="div-lev" style="width: calc(100% - 20px)">
     <div class="div-area">
-      <div class="title-area">Search result</div>
+      <div class="title-area" id="titl_search_result">Search result</div>
         <div id="div_not_found">Nothing has been found yet...</div>
         <div style="height: 150px; overflow: auto;">
           <table class="tg" id="tlb_result">
@@ -152,17 +179,19 @@
     </div>    
   </div>
 
-    
-    <br><a href="#" id="" class="button0 button1" onclick="get_tlb()">проба1</a>
-   
+    <!--
+      <br><a href="#" id="" class="button0 button1" onclick="get_tlb()">проба1</a>
+    -->
+
+    <!-- PopUp form-->   
     <div id="popup_tmpl" class="popup" style="display: none">
       <div class="popup-header">
-      <span>Click here to move</span>
+      <span id="titl_">Click here to move</span>
       <button name="close" class="but-window close-pop" style="">✖</button>
       </div>
       <div class="pop-container"></div>
       <div class="pop-footer">
-      <button name="hide" >закрыть</button>
+      <button name="hide">закрыть</button>
       </div>
     </div>
 </body>

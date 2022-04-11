@@ -1,6 +1,6 @@
 """
 Chris COHEN https://gist.github.com/chriswcohen/7e28c95ba7354a986c34
-Rafal W. kenorb https://github.com/kenorb/dotfiles/commit/9dcae15b2cfb7d3a43d2479f5058b41f7987b9b0
+Rafal W. kenorb https://github.com/kenorb/dotfiles
 
 """
 
@@ -8,6 +8,7 @@ import copy
 import re
 import sys
 import os
+import json
 import coinaddrvalidator
 import coins
 from s_bridge import out_fnc
@@ -56,11 +57,21 @@ def examine_all():
             change_info()
             to_examine(path_to_file)
     out_fnc({'type': "JS", 'val': "change_status('end')"})
-    print("\nSTOP")
 
 
 # Pass info about current process in HTML-page
 def change_info():
+    pack = {
+        "cur_file_name": pro["cur_file"] if pro["cur_file"].isprintable else "<->",
+        "cur_folder_name": pro["cur_folder"] if pro["cur_folder"].isprintable else "<->",
+        "folders_examined": pro["folders_examined"],
+        "files_examined": pro["files_examined"],
+        "count_hits": pro["count_hits"]
+    }
+    js = "change_info({})".format(json.dumps(pack))
+    out_fnc({'type': "JS", 'val': js})
+
+    return
     cur_file_name = pro["cur_file"] if pro["cur_file"].isprintable else "<filename contains unprintable characters>"
     cur_folder_name = pro["cur_folder"] if pro["cur_folder"].isprintable else "<foldername contains unprintable characters>"
     info_main = "Scanning process: Number folder: {}.  Number file: {}. Number of founded: {}" \
@@ -108,7 +119,7 @@ def examine_file(ffile):
                 gr = coins.coins[g]
                 for i in range(0, len(gr['Patterns'])):   # Second regex pattern is unicode, first - not
 
-                    if (pro["mode_unicode"] == True and i == 0)  or (pro["mode_nonunicode"] == True and i == 1):
+                    if (not pro["mode_unicode"] and i == 1) or (not pro["mode_nonunicode"] and i == 0):
                         continue
                     for match in re.finditer(gr['Patterns'][i], mm):
                         s = match.start()

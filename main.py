@@ -1,3 +1,4 @@
+import configparser
 import json
 import sys
 import tkinter as tk
@@ -11,6 +12,37 @@ from tkinter import filedialog
 import crypto_find as cs
 from mini import *
 from xls import to_excel
+
+config = {}
+dct = {}
+cur_lang = {}
+
+
+# Get saved settings
+def get_config():
+    global config
+    with open('config.json') as json_file:
+        config = json.load(json_file)
+
+
+# Save new settings
+def save_config():
+    global config
+    with open('config.json', 'w') as outfile:
+        json.dump(config, outfile)
+
+
+# Get saved settings when project starting
+def start_init():
+    return
+    global config
+    config = configparser.ConfigParser()
+    config.read('ini.ini')
+    lang = config["MAIN"]["Lang"]
+    print(lang)
+    config["MAIN"]["Lang"] = 'ru' if lang == 'en' else 'en'
+    with open('ini.ini', 'w') as configfile:
+        config.write(configfile)
 
 
 # This is a bridge for calling any functions of this and other modules from external modules
@@ -31,13 +63,14 @@ def runJS(pack):
 
 # General function - fork for calling other functions
 def click_in_pro(itm, value):
-    if itm == "add_item_in_tlb":
+    if itm == "change_language":
+        change_language(value)
+    elif itm == "add_item_in_tlb":
         add_item_in_tlb(value)
     elif itm == "go_select":
         get_folder()
     elif itm == "go_search":
         cs.pro = value
-        #runJS("change_status('run')")
         WMain.thread.start()
     elif itm == "to_excel":
         to_excel(cs.result)
@@ -51,6 +84,29 @@ def fill_coins():
     txt_list = ";".join(list_of_coins)
     js = "fill_coins('{}')".format(txt_list)
     runJS(js)
+
+
+# Get dictionary with languages
+def get_languages():
+    global dct
+    with open('lang.json', encoding='utf-8') as json_file:
+        dct = json.load(json_file)
+    runJS("get_languages('{}')".format(json.dumps(dct)))
+    change_language('')
+    runJS("change_language('{}')".format(config['lang']))
+
+
+# Change language by clicking in browser
+def change_language(lang):
+    global config, cur_lang
+    if lang:
+        config["lang"] = lang
+    else:
+        if not config['lang']:
+            config['lang'] = 'en'
+        lang = config["lang"]
+    cur_lang = dct[lang]
+    save_config()
 
 
 # Dialog for selecting a folder for searching
@@ -83,14 +139,15 @@ def first_load():
     file_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "html/main.html"))
     local_url = QUrl.fromLocalFile(file_path)
     WMain.loadFinished.connect(fill_coins)
+    WMain.loadFinished.connect(get_config)
+    WMain.loadFinished.connect(get_languages)
     WMain.load(QUrl(local_url))
-#    fill_coins()
 
 
 # Starting
 if __name__ == "__main__":
     app = QApplication(sys.argv)
     WMain = f_main.WB()
-    WMain.show()
+    WMain.showNormal()
     first_load()
     sys.exit(app.exec_())

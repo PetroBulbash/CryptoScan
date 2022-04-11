@@ -23,10 +23,10 @@ function iniPop(pack) {
 	p_title.innerText = pack.title;
 	if (pack.thead) createInPopTable(p_container, pack.thead, pack.tbody);
 	if (pack.inHTML) p_container.innerHTML = pack.inHTML;
-	pack.buttons.split(";").forEach(function(itm){
-		let button = 
-		document.createElement("button");
-	  	button.innerText=itm;
+	pack.buttons.split(";").forEach(function(itm) {
+		let button = document.createElement("button");
+	  	button.innerText = itm;
+		button.id = "pop_" + itm;
 	  	p_footer.appendChild(button);
 	  	button.classList.add("pop-button");
 	  	button.setAttribute("typ_pop", pack.typ);
